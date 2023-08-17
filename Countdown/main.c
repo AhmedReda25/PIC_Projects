@@ -155,5 +155,5 @@ void Compare_match_routine(void)
                 current_loc = STRT_LOC;
             }
         }
-    CCP1IF = 0;
+    
 }
