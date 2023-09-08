@@ -29,7 +29,7 @@
 #endif
 
 #define STRING_COMPLETE   1
-#define STRING_TERMINATE '0'
+#define STRING_TERMINATE '0' //For Asynchronous string receive, assuming '0' character will be sent to mark the end of transfer
 
 #define TxREADY 0
 #define TxBUSY  1
@@ -48,6 +48,10 @@ void UARTString(char *st);
 void UART_StringNonBlocking(char *st);
 uint8_t UART_ReadStringNonBlocking(char *str, uint8_t len);
 
+<<<<<<< HEAD
 void UART_SetTxHandler(void(*pf)(void));
 void UART_SetRxHandler(void(*pf)(void));
 #endif
+=======
+#endif
+>>>>>>> 5540774fe780e226359595f00df55d9822ffc4b7
