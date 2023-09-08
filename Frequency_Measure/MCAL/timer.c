@@ -1,7 +1,7 @@
 #include "timer.h"
 
-static void (*CCP1_callback)(void) = 0;
-static void (*TMR1_OVF_Handler)(void) = 0;
+void (*CCP1_callback)(void) = 0;
+void (*TMR1_OVF_Handler)(void) = 0;
 
 uint8_t T1_preload = 0;
 
@@ -47,24 +47,6 @@ void Set_T1OVF_ISR(void(*pf)(void))
 void Set_Capture_ISR(void(*pf)())
 {
     CCP1_callback = pf;
-}
-/*------------------------------------------------------------------------------------------------------------------*/
-void __interrupt() _ISR(void)
-{
-	if(CCP1IF)
-	{
-		if(CCP1_callback) /* Check NULL pointer */
-			(*CCP1_callback)(); /* Execute timer1 callback routine */
-		
-		CCP1IF = 0;
-	}
-    if(TMR1IF)
-    {
-        if(TMR1_OVF_Handler)
-            TMR1_OVF_Handler();
-        
-        TMR1IF = 0;
-    }
 }
 /*------------------------------------------------------------------------------------------------------------------*/
 void CCP1_init(CCP_mode_t mode)

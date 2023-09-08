@@ -1,9 +1,3 @@
-/*
- * File:   main.c
- * Author: user
- *
- * Created on April 27, 2023, 2:52 PM
- */
 
 
 #include <xc.h>

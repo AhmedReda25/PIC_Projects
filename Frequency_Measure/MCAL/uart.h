@@ -16,20 +16,26 @@
 #define RECEPTION_ENABLE    1
 #define ASYNCHRONOUS        1
 /*--------------------------------------------------------------------------------------------------*/
-#define GLOBAL_INTERRUPTENABLE()     (GIE = 1)
-#define GLOBAL_INTERRUPTDISABLE()    (GIE = 0)
+#define GLOBAL_INTERRUPT_ENABLE()      (GIE = 1)
+#define GLOBAL_INTERRUPT_DISABLE()     (GIE = 0)
 
-#define PERIPHERAL_INTERRUPTENABLE() (PEIE = 1)
-#define PERIPHERAL_INTERRUPTDISABLE() (PEIE = 0)
+#define PERIPHERAL_INTERRUPT_ENABLE()  (PEIE = 1)
+#define PERIPHERAL_INTERRUPT_DISABLE() (PEIE = 0)
 
 #if HIGH_SPEED
-#define MYSPBRG ((16000000UL/16/MYBUAD)-1)
+#define MYSPBRG ((16000000UL/(16*MYBUAD))-1)
 #else
 #define MYSPBRG ((16000000/64/MYBUAD)-1)
 #endif
 
 #define STRING_COMPLETE   1
 #define STRING_TERMINATE '0'
+
+#define TxREADY 0
+#define TxBUSY  1
+
+#define RxREADY 0
+#define RxBUSY  1
 
 void UART_Init(void);
 void UART_Receiv_IntEn(void);
@@ -40,7 +46,8 @@ char UARTRead(void);
 char UARTReadNonBlocking(void);
 void UARTString(char *st);
 void UART_StringNonBlocking(char *st);
-uint8_t UART_ReadStringNonBlocking(char *st);
+uint8_t UART_ReadStringNonBlocking(char *str, uint8_t len);
 
-
+void UART_SetTxHandler(void(*pf)(void));
+void UART_SetRxHandler(void(*pf)(void));
 #endif
