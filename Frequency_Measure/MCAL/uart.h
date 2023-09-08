@@ -29,7 +29,7 @@
 #endif
 
 #define STRING_COMPLETE   1
-#define STRING_TERMINATE '0' //For Asynchronous string receive, assuming '0' character will be sent mark the end of transfer
+#define STRING_TERMINATE '0' //For Asynchronous string receive, assuming '0' character will be sent to mark the end of transfer
 
 void UART_Init(void);
 void UART_Receiv_IntEn(void);
